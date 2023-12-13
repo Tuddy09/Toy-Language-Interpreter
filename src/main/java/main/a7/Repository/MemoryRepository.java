@@ -29,6 +29,11 @@ public class MemoryRepository implements Repository {
     }
 
     @Override
+    public String toString() {
+        return ListOfProgramStates.getLast().toString();
+    }
+
+    @Override
     public void setPrgList(List<PrgState> newPrgList) {
         ListOfProgramStates = newPrgList;
     }

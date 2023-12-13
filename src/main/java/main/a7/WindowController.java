@@ -1,10 +1,11 @@
 package main.a7;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.cell.TextFieldListCell;
+import javafx.util.StringConverter;
 import main.a7.Controller.Controller;
 import main.a7.Model.Expressions.*;
 import main.a7.Model.MyException;
@@ -20,14 +21,19 @@ import main.a7.Model.Values.IntValue;
 import main.a7.Model.Values.StringValue;
 import main.a7.Repository.MemoryRepository;
 import main.a7.Repository.Repository;
+import main.a7.View.RunExample;
+
 
 public class WindowController {
     @FXML
     public Label selectProgramLabel;
     @FXML
-    public ListView<String> programListView;
+    public ListView<RunExample> programListView;
 
-    ObservableList<String> programs;
+    public ListView<RunExample> getProgramListView() {
+        return programListView;
+    }
+
 
     @FXML
     void initialize() throws CloneNotSupportedException {
@@ -313,18 +319,28 @@ public class WindowController {
         Repository repository10 = new MemoryRepository(prg10, "log10.txt");
         Controller controller10 = new Controller(repository10);
 
-        programs = FXCollections.observableArrayList();
-        programs.add(ex1.toString());
-        programs.add(ex2.toString());
-        programs.add(ex3.toString());
-        programs.add(ex4.toString());
-        programs.add(ex5.toString());
-        programs.add(ex6.toString());
-        programs.add(ex7.toString());
-        programs.add(ex8.toString());
-        programs.add(ex9.toString());
-        programs.add(ex10.toString());
-        programListView.setItems(programs);
+        programListView.setCellFactory(TextFieldListCell.forListView(new StringConverter<>() {
+            @Override
+            public String toString(RunExample runExample) {
+                return runExample.toString();
+            }
 
+            @Override
+            public RunExample fromString(String s) {
+                return null;
+            }
+        }));
+        programListView.getItems().add(new RunExample("1", ex1.toString(), controller1));
+        programListView.getItems().add(new RunExample("2", ex2.toString(), controller2));
+        programListView.getItems().add(new RunExample("3", ex3.toString(), controller3));
+        programListView.getItems().add(new RunExample("4", ex4.toString(), controller4));
+        programListView.getItems().add(new RunExample("5", ex5.toString(), controller5));
+        programListView.getItems().add(new RunExample("6", ex6.toString(), controller6));
+        programListView.getItems().add(new RunExample("7", ex7.toString(), controller7));
+        programListView.getItems().add(new RunExample("8", ex8.toString(), controller8));
+        programListView.getItems().add(new RunExample("9", ex9.toString(), controller9));
+        programListView.getItems().add(new RunExample("10", ex10.toString(), controller10));
+
+        programListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 }

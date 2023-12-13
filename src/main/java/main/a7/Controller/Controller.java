@@ -111,4 +111,8 @@ public class Controller {
         repository.setPrgList(prgList);
     }
 
+    @Override
+    public String toString() {
+        return repository.toString();
+    }
 }

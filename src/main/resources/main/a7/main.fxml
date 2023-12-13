@@ -1,16 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="main.a7.MainController">
-  <padding>
-    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-  </padding>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-  <Label fx:id="welcomeText"/>
-  <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<HBox prefHeight="674.0" prefWidth="813.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.a7.MainController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="674.0" prefWidth="279.0">
+         <children>
+            <Text fill="#1c1783" strokeType="OUTSIDE" strokeWidth="0.0" text="HeapTable" textAlignment="CENTER" wrappingWidth="286.9830722808838">
+               <font>
+                  <Font name="Roboto Medium" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Text>
+            <TableView fx:id="heapTableView" prefHeight="253.0" prefWidth="299.0">
+              <columns>
+                <TableColumn fx:id="addressColumn" prefWidth="75.0" text="C1" />
+                <TableColumn fx:id="valueHeapColumn" prefWidth="75.0" text="C2" />
+              </columns>
+               <VBox.margin>
+                  <Insets left="20.0" top="20.0" />
+               </VBox.margin>
+            </TableView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of program states:" textAlignment="CENTER" wrappingWidth="293.9830722808838">
+               <font>
+                  <Font name="Roboto Medium" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Text>
+            <TextField fx:id="numberOfPrgStatesTextField" prefHeight="26.0" prefWidth="299.0">
+               <VBox.margin>
+                  <Insets left="20.0" top="20.0" />
+               </VBox.margin>
+            </TextField>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Program states IDs">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Text>
+            <ListView fx:id="prgStatesIdsListView" prefHeight="200.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets left="20.0" top="20.0" />
+               </VBox.margin>
+            </ListView>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" prefHeight="674.0" prefWidth="264.0">
+         <children>
+            <Text fill="#9a1a1a" strokeType="OUTSIDE" strokeWidth="0.0" text="Out" textAlignment="CENTER" wrappingWidth="234.9830722808838">
+               <font>
+                  <Font name="Roboto Medium" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Text>
+            <ListView fx:id="outListView" prefHeight="257.0" prefWidth="264.0">
+               <VBox.margin>
+                  <Insets left="20.0" top="20.0" />
+               </VBox.margin>
+            </ListView>
+            <Button fx:id="runOneStepButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="199.0" text="Run one step">
+               <font>
+                  <Font name="Roboto Medium" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Button>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SymbolTable">
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </Text>
+            <TableView fx:id="symbolTableView" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="varNameColumn" prefWidth="75.0" text="C1" />
+                <TableColumn fx:id="symbolTableValueColumn" prefWidth="75.0" text="C2" />
+              </columns>
+               <VBox.margin>
+                  <Insets left="20.0" top="20.0" />
+               </VBox.margin>
+            </TableView>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER">
+         <children>
+            <Text fill="#2f7475" strokeType="OUTSIDE" strokeWidth="0.0" text="FileTable" textAlignment="CENTER" wrappingWidth="189.9830722808838">
+               <font>
+                  <Font name="Roboto Medium" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Text>
+            <ListView fx:id="fileTableListView" prefHeight="260.0" prefWidth="227.0">
+               <VBox.margin>
+                  <Insets left="20.0" top="20.0" />
+               </VBox.margin>
+            </ListView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ExecutionStack">
+               <VBox.margin>
+                  <Insets top="95.0" />
+               </VBox.margin>
+            </Text>
+            <ListView fx:id="executionStackListView" prefHeight="200.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets left="20.0" top="20.0" />
+               </VBox.margin>
+            </ListView>
+         </children>
+      </VBox>
+   </children>
+</HBox>

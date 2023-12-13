@@ -11,13 +11,17 @@ public class RunExample extends Command {
     }
 
     @Override
+    public String toString() {
+        return this.getKey() + " " + this.getDescription();
+    }
+
+    @Override
     public void execute() {
         try {
             controller.allStep();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
-        }
-        catch (RuntimeException ignored){
+        } catch (RuntimeException ignored) {
 
         }
     }
