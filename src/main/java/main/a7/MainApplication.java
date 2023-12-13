@@ -16,13 +16,13 @@ public class MainApplication extends Application {
         FXMLLoader fxmlLoader2 = new FXMLLoader(MainApplication.class.getResource("window.fxml"));
         Scene scene2 = new Scene(fxmlLoader2.load(), 500, 400);
 
-        stage.setTitle("~Toy Language Interpreter~");
+        stage.setTitle("~ Toy Language Interpreter ~");
         stage.setScene(scene1);
         stage.show();
 
         Stage stage1 = new Stage();
         stage1.setScene(scene2);
-        stage1.setTitle("~Programs~");
+        stage1.setTitle("~ Programs ~");
         stage1.show();
 
 
