@@ -25,8 +25,8 @@
             </Text>
             <TableView fx:id="heapTableView" prefHeight="253.0" prefWidth="299.0">
               <columns>
-                <TableColumn fx:id="addressColumn" prefWidth="75.0" text="C1" />
-                <TableColumn fx:id="valueHeapColumn" prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="addressColumn" prefWidth="135.0" text="Address" />
+                <TableColumn fx:id="valueHeapColumn" minWidth="7.0" prefWidth="138.0" text="Value" />
               </columns>
                <VBox.margin>
                   <Insets left="20.0" top="20.0" />
@@ -87,8 +87,8 @@
             </Text>
             <TableView fx:id="symbolTableView" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn fx:id="varNameColumn" prefWidth="75.0" text="C1" />
-                <TableColumn fx:id="symbolTableValueColumn" prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="varNameColumn" prefWidth="123.0" text="VariableName" />
+                <TableColumn fx:id="symbolTableValueColumn" prefWidth="120.0" text="Value" />
               </columns>
                <VBox.margin>
                   <Insets left="20.0" top="20.0" />

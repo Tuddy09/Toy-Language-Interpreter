@@ -15,6 +15,10 @@ public class RunExample extends Command {
         return this.getKey() + " " + this.getDescription();
     }
 
+    public Controller getController() {
+        return this.controller;
+    }
+
     @Override
     public void execute() {
         try {

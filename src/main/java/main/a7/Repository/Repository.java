@@ -13,4 +13,6 @@ public interface Repository {
     void setPrgList(List<PrgState> newPrgList);
 
     void logPrgStateExec(PrgState prgState) throws IOException;
+
+
 }

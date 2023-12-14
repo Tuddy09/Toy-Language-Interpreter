@@ -1,5 +1,8 @@
 package main.a7.Model.DataStructures;
 
+import java.util.Deque;
+import java.util.List;
+
 public interface MyStack<T> {
     T pop();
 
@@ -7,5 +10,6 @@ public interface MyStack<T> {
 
     boolean isEmpty();
 
+    Deque<T> getContent();
 }
 

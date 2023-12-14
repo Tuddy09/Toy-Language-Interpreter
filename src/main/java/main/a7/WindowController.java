@@ -319,7 +319,7 @@ public class WindowController {
         Repository repository10 = new MemoryRepository(prg10, "log10.txt");
         Controller controller10 = new Controller(repository10);
 
-        programListView.setCellFactory(TextFieldListCell.forListView(new StringConverter<>() {
+        programListView.setCellFactory(TextFieldListCell.forListView(new StringConverter<RunExample>() {
             @Override
             public String toString(RunExample runExample) {
                 return runExample.toString();

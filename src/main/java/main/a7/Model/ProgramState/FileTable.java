@@ -50,7 +50,7 @@ public class FileTable<K, V> implements MyDictionary<K, V> {
 
     @Override
     public Map<K, V> getContent() {
-        return null;
+        return filesTable;
     }
 
 }

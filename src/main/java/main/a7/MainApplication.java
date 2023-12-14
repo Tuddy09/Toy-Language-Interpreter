@@ -12,9 +12,13 @@ public class MainApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader1 = new FXMLLoader(MainApplication.class.getResource("main.fxml"));
         Scene scene1 = new Scene(fxmlLoader1.load(), 1000, 700);
+        MainController mainController = fxmlLoader1.getController();
 
         FXMLLoader fxmlLoader2 = new FXMLLoader(MainApplication.class.getResource("window.fxml"));
         Scene scene2 = new Scene(fxmlLoader2.load(), 500, 400);
+        WindowController windowController = fxmlLoader2.getController();
+
+        mainController.setWindowController(windowController);
 
         stage.setTitle("~ Toy Language Interpreter ~");
         stage.setScene(scene1);

@@ -55,7 +55,7 @@ public class Controller {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    void oneStepForAllPrg(List<PrgState> prgList) throws InterruptedException {
+    public void oneStepForAllPrg(List<PrgState> prgList) throws InterruptedException {
         prgList.forEach(prg -> {
             try {
                 repository.logPrgStateExec(prg);
@@ -114,5 +114,24 @@ public class Controller {
     @Override
     public String toString() {
         return repository.toString();
+    }
+
+    public Repository getRepo() {
+        return this.repository;
+    }
+
+    public void oneStepExecution() throws InterruptedException {
+        executor = Executors.newFixedThreadPool(2);
+        List<PrgState> prgList = removeCompletedPrg(repository.getPrgList());
+        if (!prgList.isEmpty()) {
+            List<Integer> symTableAddr = new ArrayList<>();
+            prgList.forEach(prg -> symTableAddr.addAll(getAddrFromSymTable(prg.getSymTable().getContent().values())));
+            prgList.getLast().getHeap().setContent(enhancedGarbageCollector(symTableAddr, getAddrFromHeap(prgList.getLast().getHeap().getContent().values()),
+                    prgList.getLast().getHeap().getContent()));
+            oneStepForAllPrg(prgList);
+            prgList = removeCompletedPrg(repository.getPrgList());
+        }
+        executor.shutdownNow();
+        repository.setPrgList(prgList);
     }
 }

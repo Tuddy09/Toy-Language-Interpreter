@@ -75,4 +75,23 @@ public class PrgState {
     public MyHeap<Integer, Value> getHeap() {
         return heap;
     }
+
+    @Override
+    public String toString() {
+        String representation = "";
+        representation += "\n------------------\n";
+        representation += "Program ID: " + id + "\n";
+        representation += "Execution Stack: \n";
+        representation += this.exeStack.toString();
+        representation += "\nSymbol Table:\n";
+        representation += this.symTable.toString();
+        representation += "\nOutput Table:\n";
+        representation += this.out.toString();
+        representation += "\nFile Table:\n";
+        representation += this.fileTable.toString();
+        representation += "\nHeap: \n";
+        representation += this.heap.toString();
+
+        return representation;
+    }
 }

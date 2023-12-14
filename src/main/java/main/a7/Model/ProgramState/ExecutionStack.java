@@ -36,4 +36,9 @@ public class ExecutionStack<T> implements MyStack<T> {
         return stack.isEmpty();
     }
 
+    @Override
+    public Deque<T> getContent() {
+        return this.stack;
+    }
+
 }
