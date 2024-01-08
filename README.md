@@ -46,5 +46,7 @@
 
 # Demo
 - Examples Window:
-- ![ExamplesWindow](https://user-images.githubusercontent.com/72063091/158892930-398047e7-099e-49a7-83f3-03952b6a4264.png)
-- ![ExecutionWindow](https://user-images.githubusercontent.com/72063091/158892998-4d77c73c-a1a6-4e06-ba2d-e68f5a72fb2b.png)
+![Screenshot 2024-01-08 125646](https://github.com/Tuddy09/ToyLanguageInterpreter/assets/115088565/099c122c-6dc1-4035-97a1-3ed5c9d19714)
+![Screenshot 2024-01-08 125700](https://github.com/Tuddy09/ToyLanguageInterpreter/assets/115088565/f775edfb-c1f1-4e09-a651-b7edb8c3983b)
+
+
