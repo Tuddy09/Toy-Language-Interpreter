@@ -318,6 +318,61 @@ public class WindowController {
         PrgState prg10 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), ex10);
         Repository repository10 = new MemoryRepository(prg10, "log10.txt");
         Controller controller10 = new Controller(repository10);
+        //write the next example using Ref int a; Ref int b; int v;
+        //new(a,0); new(b,0);
+        //wh(a,1); wh(b,2);
+        //v=(rh(a)<rh(b))?100:200;
+        //print(v);
+        //v= ((rh(b)-2)>rh(a))?100:200;
+        //print(v);
+        Stmt ex11 = new CompStmt(
+                new VarDeclStmt("a", new RefType(new IntType())),
+                new CompStmt(
+                        new VarDeclStmt("b", new RefType(new IntType())),
+                        new CompStmt(
+                                new VarDeclStmt("v", new IntType()),
+                                new CompStmt(
+                                        new newStmt("a", new ValueExp(new IntValue(0))),
+                                        new CompStmt(
+                                                new newStmt("b", new ValueExp(new IntValue(0))),
+                                                new CompStmt(
+                                                        new wHStmt("a", new ValueExp(new IntValue(1))),
+                                                        new CompStmt(
+                                                                new wHStmt("b", new ValueExp(new IntValue(2))),
+                                                                new CompStmt(
+                                                                        new CondAssignStmt("v",
+                                                                                new RelationalExp("<", new rHExp(new VarExp("a")), new rHExp(new VarExp("b"))),
+                                                                                new ValueExp(new IntValue(100)),
+                                                                                new ValueExp(new IntValue(200))),
+                                                                        new CompStmt(
+                                                                                new PrintStmt(new VarExp("v")),
+                                                                                new CompStmt(
+                                                                                        new CondAssignStmt("v",
+                                                                                                new RelationalExp(">",
+                                                                                                        new ArithExp("-", new rHExp(new VarExp("b")), new ValueExp(new IntValue(2))),
+                                                                                                        new rHExp(new VarExp("a"))),
+                                                                                                        new ValueExp(new IntValue(100)),
+                                                                                                        new ValueExp(new IntValue(200))),
+                                                                                        new PrintStmt(new VarExp("v"))
+                                                                                )
+                                                                        )
+
+                                                                )
+                                                        )
+                                                )
+                                        )
+                                )
+                        )
+                )
+        );
+        try {
+            ex11.typecheck(new FileTable<>());
+        } catch (MyException msg) {
+            System.err.println(msg + "\ntypecheck error in ex11");
+        }
+        PrgState prg11 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), ex11);
+        Repository repository11 = new MemoryRepository(prg11, "log11.txt");
+        Controller controller11 = new Controller(repository11);
 
         programListView.setCellFactory(TextFieldListCell.forListView(new StringConverter<RunExample>() {
             @Override
@@ -340,6 +395,7 @@ public class WindowController {
         programListView.getItems().add(new RunExample("8", ex8.toString(), controller8));
         programListView.getItems().add(new RunExample("9", ex9.toString(), controller9));
         programListView.getItems().add(new RunExample("10", ex10.toString(), controller10));
+        programListView.getItems().add(new RunExample("11", ex11.toString(), controller11));
 
         programListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
