@@ -319,38 +319,33 @@ public class WindowController {
         Repository repository10 = new MemoryRepository(prg10, "log10.txt");
         Controller controller10 = new Controller(repository10);
         Stmt ex11 = new CompStmt(
-                new VarDeclStmt("a", new RefType(new IntType())),
+                new VarDeclStmt("a", new IntType()),
                 new CompStmt(
-                        new VarDeclStmt("b", new RefType(new IntType())),
+                        new VarDeclStmt("b", new IntType()),
                         new CompStmt(
-                                new VarDeclStmt("v", new IntType()),
+                                new VarDeclStmt("c", new IntType()),
                                 new CompStmt(
-                                        new newStmt("a", new ValueExp(new IntValue(0))),
+                                        new AssignStmt("a", new ValueExp(new IntValue(1))),
                                         new CompStmt(
-                                                new newStmt("b", new ValueExp(new IntValue(0))),
+                                                new AssignStmt("b", new ValueExp(new IntValue(2))),
                                                 new CompStmt(
-                                                        new wHStmt("a", new ValueExp(new IntValue(1))),
+                                                        new AssignStmt("c", new ValueExp(new IntValue(5))),
                                                         new CompStmt(
-                                                                new wHStmt("b", new ValueExp(new IntValue(2))),
-                                                                new CompStmt(
-                                                                        new CondAssignStmt("v",
-                                                                                new RelationalExp("<", new rHExp(new VarExp("a")), new rHExp(new VarExp("b"))),
-                                                                                new ValueExp(new IntValue(100)),
-                                                                                new ValueExp(new IntValue(200))),
+                                                                new SwitchStmt(
+                                                                        new ArithExp("*", new VarExp("a"), new ValueExp(new IntValue(10))),
+                                                                        new ArithExp("*", new VarExp("b"), new VarExp("c")),
                                                                         new CompStmt(
-                                                                                new PrintStmt(new VarExp("v")),
-                                                                                new CompStmt(
-                                                                                        new CondAssignStmt("v",
-                                                                                                new RelationalExp(">",
-                                                                                                        new ArithExp("-", new rHExp(new VarExp("b")), new ValueExp(new IntValue(2))),
-                                                                                                        new rHExp(new VarExp("a"))),
-                                                                                                new ValueExp(new IntValue(100)),
-                                                                                                new ValueExp(new IntValue(200))),
-                                                                                        new PrintStmt(new VarExp("v"))
-                                                                                )
-                                                                        )
-
-                                                                )
+                                                                                new PrintStmt(new VarExp("a")),
+                                                                                new PrintStmt(new VarExp("b"))
+                                                                        ),
+                                                                        new ValueExp(new IntValue(10)),
+                                                                        new CompStmt(
+                                                                                new PrintStmt(new ValueExp(new IntValue(100))),
+                                                                                new PrintStmt(new ValueExp(new IntValue(200)))
+                                                                        ),
+                                                                        new PrintStmt(new ValueExp(new IntValue(300)))
+                                                                ),
+                                                                new PrintStmt(new ValueExp(new IntValue(300)))
                                                         )
                                                 )
                                         )
@@ -358,6 +353,11 @@ public class WindowController {
                         )
                 )
         );
+        try {
+            ex11.typecheck(new FileTable<>());
+        } catch (MyException msg) {
+            System.err.println(msg + "\ntypecheck error in ex11");
+        }
         try {
             ex11.typecheck(new FileTable<>());
         } catch (MyException msg) {
