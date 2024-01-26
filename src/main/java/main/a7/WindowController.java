@@ -50,7 +50,7 @@ public class WindowController {
             System.err.println(msg + "\ntypecheck error in ex1");
         }
 
-        PrgState prg1 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), ex1);
+        PrgState prg1 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), new LatchTable(), ex1);
         Repository repository1 = new MemoryRepository(prg1, "log1.txt");
         Controller controller1 = new Controller(repository1);
         Stmt ex2 = new CompStmt(
@@ -90,7 +90,7 @@ public class WindowController {
         } catch (MyException msg) {
             System.err.println(msg + "\ntypecheck error in ex2");
         }
-        PrgState prg2 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), ex2);
+        PrgState prg2 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), new LatchTable(), ex2);
         Repository repository2 = new MemoryRepository(prg2, "log2.txt");
         Controller controller2 = new Controller(repository2);
         Stmt ex3 = new CompStmt(
@@ -115,7 +115,7 @@ public class WindowController {
         } catch (MyException msg) {
             System.err.println(msg + "\ntypecheck error in ex3");
         }
-        PrgState prg3 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), ex3);
+        PrgState prg3 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), new LatchTable(), ex3);
         Repository repository3 = new MemoryRepository(prg3, "log3.txt");
         Controller controller3 = new Controller(repository3);
         Stmt ex4 = new CompStmt(
@@ -148,7 +148,7 @@ public class WindowController {
         } catch (MyException msg) {
             System.err.println(msg + "\ntypecheck error in ex4");
         }
-        PrgState prg4 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), ex4);
+        PrgState prg4 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), new LatchTable(), ex4);
         Repository repository4 = new MemoryRepository(prg4, "log4.txt");
         Controller controller4 = new Controller(repository4);
 
@@ -170,7 +170,7 @@ public class WindowController {
         } catch (MyException msg) {
             System.err.println(msg + "\ntypecheck error in ex5");
         }
-        PrgState prg5 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), ex5);
+        PrgState prg5 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), new LatchTable(), ex5);
         Repository repository5 = new MemoryRepository(prg5, "log5.txt");
         Controller controller5 = new Controller(repository5);
 
@@ -195,7 +195,7 @@ public class WindowController {
         } catch (MyException msg) {
             System.err.println(msg + "\ntypecheck error in ex6");
         }
-        PrgState prg6 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), ex6);
+        PrgState prg6 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), new LatchTable(), ex6);
         Repository repository6 = new MemoryRepository(prg6, "log6.txt");
         Controller controller6 = new Controller(repository6);
 
@@ -220,7 +220,7 @@ public class WindowController {
         } catch (MyException msg) {
             System.err.println(msg + "\ntypecheck error in ex7");
         }
-        PrgState prg7 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), ex7);
+        PrgState prg7 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), new LatchTable(), ex7);
         Repository repository7 = new MemoryRepository(prg7, "log7.txt");
         Controller controller7 = new Controller(repository7);
 
@@ -245,7 +245,7 @@ public class WindowController {
         } catch (MyException msg) {
             System.err.println(msg + "\ntypecheck error in ex8");
         }
-        PrgState prg8 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), ex8);
+        PrgState prg8 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), new LatchTable(), ex8);
         Repository repository8 = new MemoryRepository(prg8, "log8.txt");
         Controller controller8 = new Controller(repository8);
         Stmt ex9 = new CompStmt(
@@ -283,7 +283,7 @@ public class WindowController {
         } catch (MyException msg) {
             System.err.println(msg + "\ntypecheck error in ex9");
         }
-        PrgState prg9 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), ex9);
+        PrgState prg9 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), new LatchTable(), ex9);
         Repository repository9 = new MemoryRepository(prg9, "log9.txt");
         Controller controller9 = new Controller(repository9);
 
@@ -315,7 +315,7 @@ public class WindowController {
         } catch (MyException msg) {
             System.err.println(msg + "\ntypecheck error in ex10");
         }
-        PrgState prg10 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), ex10);
+        PrgState prg10 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), new LatchTable(), ex10);
         Repository repository10 = new MemoryRepository(prg10, "log10.txt");
         Controller controller10 = new Controller(repository10);
         Stmt ex11 = new CompStmt(
@@ -363,9 +363,93 @@ public class WindowController {
         } catch (MyException msg) {
             System.err.println(msg + "\ntypecheck error in ex11");
         }
-        PrgState prg11 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), ex11);
+        PrgState prg11 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), new LatchTable(), ex11);
         Repository repository11 = new MemoryRepository(prg11, "log11.txt");
         Controller controller11 = new Controller(repository11);
+        //write this example in code: Ref int v1; Ref int v2; Ref int v3; int cnt;
+        //new(v1,2);new(v2,3);new(v3,4);newLatch(cnt,rH(v2));
+        //fork(wh(v1,rh(v1)*10));print(rh(v1));countDown(cnt);
+        //fork(wh(v2,rh(v2)*10));print(rh(v2));countDown(cnt);
+        //fork(wh(v3,rh(v3)*10));print(rh(v3));countDown(cnt))));
+        //await(cnt);
+        //print(100);
+        //countDown(cnt);
+        //print(100)
+        Stmt ex12 = new CompStmt(
+                new VarDeclStmt("v1", new RefType(new IntType())),
+                new CompStmt(
+                        new VarDeclStmt("v2", new RefType(new IntType())),
+                        new CompStmt(
+                                new VarDeclStmt("v3", new RefType(new IntType())),
+                                new CompStmt(
+                                        new VarDeclStmt("cnt", new IntType()),
+                                        new CompStmt(
+                                                new newStmt("v1", new ValueExp(new IntValue(2))),
+                                                new CompStmt(
+                                                        new newStmt("v2", new ValueExp(new IntValue(3))),
+                                                        new CompStmt(
+                                                                new newStmt("v3", new ValueExp(new IntValue(4))),
+                                                                new CompStmt(
+                                                                        new newLatch("cnt", new rHExp(new VarExp("v2"))),
+                                                                        new CompStmt(
+                                                                                new forkStmt(
+                                                                                        new CompStmt(
+                                                                                                new wHStmt("v1", new ArithExp("*", new rHExp(new VarExp("v1")), new ValueExp(new IntValue(10)))),
+                                                                                                new CompStmt(
+                                                                                                        new PrintStmt(new rHExp(new VarExp("v1"))),
+                                                                                                        new countDown("cnt")
+                                                                                                )
+                                                                                        )
+                                                                                ),
+                                                                                new CompStmt(
+                                                                                        new forkStmt(
+                                                                                                new CompStmt(
+                                                                                                        new wHStmt("v2", new ArithExp("*", new rHExp(new VarExp("v2")), new ValueExp(new IntValue(10)))),
+                                                                                                        new CompStmt(
+                                                                                                                new PrintStmt(new rHExp(new VarExp("v2"))),
+                                                                                                                new countDown("cnt")
+                                                                                                        )
+                                                                                                )
+                                                                                        ),
+                                                                                        new CompStmt(
+                                                                                                new forkStmt(
+                                                                                                        new CompStmt(
+                                                                                                                new wHStmt("v3", new ArithExp("*", new rHExp(new VarExp("v3")), new ValueExp(new IntValue(10)))),
+                                                                                                                new CompStmt(
+                                                                                                                        new PrintStmt(new rHExp(new VarExp("v3"))),
+                                                                                                                        new countDown("cnt")
+                                                                                                                )
+                                                                                                        )
+                                                                                                ),
+                                                                                                new CompStmt(
+                                                                                                        new await("cnt"),
+                                                                                                        new CompStmt(
+                                                                                                                new PrintStmt(new ValueExp(new IntValue(100))),
+                                                                                                                new CompStmt(
+                                                                                                                        new countDown("cnt"),
+                                                                                                                        new PrintStmt(new ValueExp(new IntValue(100)))
+                                                                                                                )
+                                                                                                        )
+                                                                                                )
+                                                                                        )
+                                                                                )
+                                                                        )
+                                                                )
+                                                        )
+                                                )
+                                        )
+                                )
+                        )
+                )
+        );
+        try {
+            ex12.typecheck(new FileTable<>());
+        } catch (MyException msg) {
+            System.err.println(msg + "\ntypecheck error in ex12");
+        }
+        PrgState prg12 = new PrgState(new ExecutionStack<>(), new SymTable(), new Out<>(), new FileTable<>(), new Heap<>(), new LatchTable(), ex12);
+        Repository repository12 = new MemoryRepository(prg12, "log12.txt");
+        Controller controller12 = new Controller(repository12);
         programListView.setCellFactory(TextFieldListCell.forListView(new StringConverter<>() {
             @Override
             public String toString(RunExample runExample) {
@@ -388,6 +472,7 @@ public class WindowController {
         programListView.getItems().add(new RunExample("9", ex9.toString(), controller9));
         programListView.getItems().add(new RunExample("10", ex10.toString(), controller10));
         programListView.getItems().add(new RunExample("11", ex11.toString(), controller11));
+        programListView.getItems().add(new RunExample("12", ex12.toString(), controller12));
 
         programListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }

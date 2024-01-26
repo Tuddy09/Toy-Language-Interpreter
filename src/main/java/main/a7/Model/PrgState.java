@@ -4,6 +4,7 @@ import main.a7.Model.DataStructures.MyDictionary;
 import main.a7.Model.DataStructures.MyHeap;
 import main.a7.Model.DataStructures.MyList;
 import main.a7.Model.DataStructures.MyStack;
+import main.a7.Model.ProgramState.LatchTable;
 import main.a7.Model.ProgramState.SymTable;
 import main.a7.Model.Statements.Stmt;
 import main.a7.Model.Values.StringValue;
@@ -21,18 +22,20 @@ public class PrgState {
     MyDictionary<StringValue, BufferedReader> fileTable;
 
     MyHeap<Integer, Value> heap;
+    LatchTable latchTable;
     Stmt originalProgram;
 
     private static final AtomicInteger uniqueId = new AtomicInteger();
     public int id;
 
-    public PrgState(MyStack<Stmt> stk, SymTable symtbl, MyList<Value> ot, MyDictionary<StringValue, BufferedReader> fileTable, MyHeap<Integer, Value> heap, Stmt prg) throws CloneNotSupportedException {
+    public PrgState(MyStack<Stmt> stk, SymTable symtbl, MyList<Value> ot, MyDictionary<StringValue, BufferedReader> fileTable, MyHeap<Integer, Value> heap, LatchTable latchTable, Stmt prg) throws CloneNotSupportedException {
         id = uniqueId.getAndIncrement();
         exeStack = stk;
         symTable = symtbl;
         out = ot;
         this.fileTable = fileTable;
         this.heap = heap;
+        this.latchTable = latchTable;
         originalProgram = deepCopy(prg);
         stk.push(prg);
     }
@@ -55,6 +58,10 @@ public class PrgState {
 
     public MyList<Value> getOut() {
         return out;
+    }
+
+    public LatchTable getLatchTable() {
+        return latchTable;
     }
 
     public Boolean isNotCompleted() {
@@ -91,6 +98,9 @@ public class PrgState {
         representation += this.fileTable.toString();
         representation += "\nHeap: \n";
         representation += this.heap.toString();
+        representation += "\nLatch Table: \n";
+        representation += this.latchTable.toString();
+        representation += "\n------------------\n";
 
         return representation;
     }

@@ -6,11 +6,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.util.StringConverter;
 import main.a7.Model.DataModel.HeapEntry;
+import main.a7.Model.DataModel.LatchTableEntry;
 import main.a7.Model.DataModel.SymbolTableEntry;
-import main.a7.Model.DataStructures.MyDictionary;
-import main.a7.Model.DataStructures.MyHeap;
-import main.a7.Model.DataStructures.MyList;
-import main.a7.Model.DataStructures.MyStack;
+import main.a7.Model.DataStructures.*;
 import main.a7.Model.PrgState;
 import main.a7.Model.Statements.Stmt;
 import main.a7.Model.Values.StringValue;
@@ -49,6 +47,12 @@ public class MainController {
     public TableColumn<HeapEntry, String> addressColumn;
     @FXML
     public TableColumn<HeapEntry, String> valueHeapColumn;
+    @FXML
+    public TableView<LatchTableEntry> latchTableView;
+    @FXML
+    public TableColumn<LatchTableEntry, String> latchLocationColumn;
+    @FXML
+    public TableColumn<LatchTableEntry, String> latchValueColumn;
 
     public void setWindowController(WindowController windowController) {
         this.windowController = windowController;
@@ -60,13 +64,16 @@ public class MainController {
     private void initialize() {
         this.numberOfPrgStatesTextField.setEditable(false);
 
-        this.addressColumn.setCellValueFactory(new PropertyValueFactory<HeapEntry, String>("heapAddress"));
-        this.valueHeapColumn.setCellValueFactory(new PropertyValueFactory<HeapEntry, String>("heapValue"));
+        this.addressColumn.setCellValueFactory(new PropertyValueFactory<>("heapAddress"));
+        this.valueHeapColumn.setCellValueFactory(new PropertyValueFactory<>("heapValue"));
 
-        this.varNameColumn.setCellValueFactory(new PropertyValueFactory<SymbolTableEntry, String>("variableName"));
-        this.symbolTableValueColumn.setCellValueFactory(new PropertyValueFactory<SymbolTableEntry, String>("value"));
+        this.varNameColumn.setCellValueFactory(new PropertyValueFactory<>("variableName"));
+        this.symbolTableValueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
 
-        this.outListView.setCellFactory(TextFieldListCell.forListView(new StringConverter<Value>() {
+        this.latchLocationColumn.setCellValueFactory(new PropertyValueFactory<>("latchLocation"));
+        this.latchValueColumn.setCellValueFactory(new PropertyValueFactory<>("latchValue"));
+
+        this.outListView.setCellFactory(TextFieldListCell.forListView(new StringConverter<>() {
             @Override
             public String toString(Value valueInterface) {
                 return valueInterface.toString();
@@ -78,7 +85,7 @@ public class MainController {
             }
         }));
 
-        this.fileTableListView.setCellFactory(TextFieldListCell.forListView(new StringConverter<StringValue>() {
+        this.fileTableListView.setCellFactory(TextFieldListCell.forListView(new StringConverter<>() {
             @Override
             public String toString(StringValue stringValue) {
                 return stringValue.toString();
@@ -90,7 +97,7 @@ public class MainController {
             }
         }));
 
-        this.prgStatesIdsListView.setCellFactory(TextFieldListCell.forListView(new StringConverter<PrgState>() {
+        this.prgStatesIdsListView.setCellFactory(TextFieldListCell.forListView(new StringConverter<>() {
             @Override
             public String toString(PrgState programState) {
                 return programState.getId();
@@ -102,7 +109,7 @@ public class MainController {
             }
         }));
 
-        this.executionStackListView.setCellFactory(TextFieldListCell.forListView(new StringConverter<Stmt>() {
+        this.executionStackListView.setCellFactory(TextFieldListCell.forListView(new StringConverter<>() {
             @Override
             public String toString(Stmt statementInterface) {
                 return statementInterface.toString();
@@ -138,6 +145,7 @@ public class MainController {
         this.prgStatesIdsListView.getItems().clear();
         this.symbolTableView.getItems().clear();
         this.executionStackListView.getItems().clear();
+        this.latchTableView.getItems().clear();
 
         // We get the list with the existing programStates
         List<PrgState> programStates = example.getController().getRepo().getPrgList();
@@ -151,11 +159,13 @@ public class MainController {
         MyHeap<Integer, Value> sharedHeap = this.selectedPrg.getHeap();
         MyDictionary<StringValue, BufferedReader> fileTable = this.selectedPrg.getFileTable();
         MyList<Value> output = this.selectedPrg.getOut();
+        MyLatchTable<Integer, Integer> latchTable = this.selectedPrg.getLatchTable();
 
         // We update their content with the new content
         sharedHeap.getContent().forEach((address, value) -> this.heapTableView.getItems().add(new HeapEntry(address, value)));
         fileTable.getContent().forEach((fileName, filePath) -> this.fileTableListView.getItems().add(fileName));
         output.getContent().forEach((value) -> this.outListView.getItems().add(value));
+        latchTable.getContent().forEach((location, value) -> this.latchTableView.getItems().add(new LatchTableEntry(location, value)));
 
         programStates.forEach((programState) -> this.prgStatesIdsListView.getItems().add(programState));
 
@@ -175,6 +185,7 @@ public class MainController {
         //We are going to repopulate them back with the "new values" if it's the case
         executionStack.getContent().forEach((statement) -> this.executionStackListView.getItems().add(statement));
         symbolTable.getContent().forEach((name, value) -> this.symbolTableView.getItems().add(new SymbolTableEntry(name, value)));
+
     }
 
     private void runOneStep(RunExample ex) {
