@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox prefHeight="674.0" prefWidth="813.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.a7.MainController">
+<HBox prefHeight="636.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.a7.MainController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="674.0" prefWidth="279.0">
          <children>
@@ -121,6 +121,25 @@
                   <Insets left="20.0" top="20.0" />
                </VBox.margin>
             </ListView>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="636.0" prefWidth="246.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SemaphoreTable" textAlignment="CENTER" wrappingWidth="243.9830722808838">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </Text>
+            <TableView fx:id="semaphoreTableView" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="semaphoreVarNameColumn" prefWidth="63.0" text="VariableName" />
+                <TableColumn fx:id="semaphoreValueColumn" prefWidth="73.0" text="Value" />
+                  <TableColumn fx:id="semaphoreListColumn" prefWidth="107.0" text="List" />
+              </columns>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </TableView>
          </children>
       </VBox>
    </children>

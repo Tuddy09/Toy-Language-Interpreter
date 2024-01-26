@@ -6,12 +6,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.util.StringConverter;
 import main.a7.Model.DataModel.HeapEntry;
+import main.a7.Model.DataModel.SemaphoreTableEntry;
 import main.a7.Model.DataModel.SymbolTableEntry;
 import main.a7.Model.DataStructures.MyDictionary;
 import main.a7.Model.DataStructures.MyHeap;
 import main.a7.Model.DataStructures.MyList;
 import main.a7.Model.DataStructures.MyStack;
 import main.a7.Model.PrgState;
+import main.a7.Model.ProgramState.SemaphoreTable;
 import main.a7.Model.Statements.Stmt;
 import main.a7.Model.Values.StringValue;
 import main.a7.Model.Values.Value;
@@ -49,6 +51,14 @@ public class MainController {
     public TableColumn<HeapEntry, String> addressColumn;
     @FXML
     public TableColumn<HeapEntry, String> valueHeapColumn;
+    @FXML
+    public TableView<SemaphoreTableEntry> semaphoreTableView;
+    @FXML
+    public TableColumn<SemaphoreTableEntry, String> semaphoreVarNameColumn;
+    @FXML
+    public TableColumn<SemaphoreTableEntry, String> semaphoreValueColumn;
+    @FXML
+    public TableColumn<SemaphoreTableEntry, List<String>> semaphoreListColumn;
 
     public void setWindowController(WindowController windowController) {
         this.windowController = windowController;
@@ -65,6 +75,10 @@ public class MainController {
 
         this.varNameColumn.setCellValueFactory(new PropertyValueFactory<SymbolTableEntry, String>("variableName"));
         this.symbolTableValueColumn.setCellValueFactory(new PropertyValueFactory<SymbolTableEntry, String>("value"));
+
+        this.semaphoreVarNameColumn.setCellValueFactory(new PropertyValueFactory<SemaphoreTableEntry, String>("identifier"));
+        this.semaphoreValueColumn.setCellValueFactory(new PropertyValueFactory<SemaphoreTableEntry, String>("value"));
+        this.semaphoreListColumn.setCellValueFactory(new PropertyValueFactory<SemaphoreTableEntry, List<String>>("list"));
 
         this.outListView.setCellFactory(TextFieldListCell.forListView(new StringConverter<Value>() {
             @Override
@@ -114,6 +128,7 @@ public class MainController {
             }
         }));
 
+
         // Like that we are able to select only one item from the list
         this.prgStatesIdsListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         // We create a listener on the programStatesListView, which in our case will look if there are changes regarding
@@ -138,6 +153,7 @@ public class MainController {
         this.prgStatesIdsListView.getItems().clear();
         this.symbolTableView.getItems().clear();
         this.executionStackListView.getItems().clear();
+        this.semaphoreTableView.getItems().clear();
 
         // We get the list with the existing programStates
         List<PrgState> programStates = example.getController().getRepo().getPrgList();
@@ -151,12 +167,13 @@ public class MainController {
         MyHeap<Integer, Value> sharedHeap = this.selectedPrg.getHeap();
         MyDictionary<StringValue, BufferedReader> fileTable = this.selectedPrg.getFileTable();
         MyList<Value> output = this.selectedPrg.getOut();
+        SemaphoreTable semaphoreTable = this.selectedPrg.getSemaphoreTable();
 
         // We update their content with the new content
         sharedHeap.getContent().forEach((address, value) -> this.heapTableView.getItems().add(new HeapEntry(address, value)));
         fileTable.getContent().forEach((fileName, filePath) -> this.fileTableListView.getItems().add(fileName));
         output.getContent().forEach((value) -> this.outListView.getItems().add(value));
-
+        semaphoreTable.getContent().forEach((var, pair) -> this.semaphoreTableView.getItems().add(new SemaphoreTableEntry(var, pair.getKey(), pair.getValue())));
         programStates.forEach((programState) -> this.prgStatesIdsListView.getItems().add(programState));
 
         // We update the number of program states

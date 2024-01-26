@@ -4,8 +4,8 @@ import javafx.beans.property.SimpleStringProperty;
 import main.a7.Model.Values.Value;
 
 public class SymbolTableEntry {
-    private SimpleStringProperty variableName;
-    private SimpleStringProperty value;
+    private final SimpleStringProperty variableName;
+    private final SimpleStringProperty value;
 
 
     public SymbolTableEntry(String variableName, Value value) {

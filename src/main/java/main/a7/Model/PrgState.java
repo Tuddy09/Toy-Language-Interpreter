@@ -4,6 +4,7 @@ import main.a7.Model.DataStructures.MyDictionary;
 import main.a7.Model.DataStructures.MyHeap;
 import main.a7.Model.DataStructures.MyList;
 import main.a7.Model.DataStructures.MyStack;
+import main.a7.Model.ProgramState.SemaphoreTable;
 import main.a7.Model.ProgramState.SymTable;
 import main.a7.Model.Statements.Stmt;
 import main.a7.Model.Values.StringValue;
@@ -17,6 +18,7 @@ public class PrgState {
     MyStack<Stmt> exeStack;
     SymTable symTable;
     MyList<Value> out;
+    SemaphoreTable semaphoreTable;
 
     MyDictionary<StringValue, BufferedReader> fileTable;
 
@@ -26,13 +28,14 @@ public class PrgState {
     private static final AtomicInteger uniqueId = new AtomicInteger();
     public int id;
 
-    public PrgState(MyStack<Stmt> stk, SymTable symtbl, MyList<Value> ot, MyDictionary<StringValue, BufferedReader> fileTable, MyHeap<Integer, Value> heap, Stmt prg) throws CloneNotSupportedException {
+    public PrgState(MyStack<Stmt> stk, SymTable symtbl, MyList<Value> ot, MyDictionary<StringValue, BufferedReader> fileTable, MyHeap<Integer, Value> heap, SemaphoreTable semaphoreTable, Stmt prg) throws CloneNotSupportedException {
         id = uniqueId.getAndIncrement();
         exeStack = stk;
         symTable = symtbl;
         out = ot;
         this.fileTable = fileTable;
         this.heap = heap;
+        this.semaphoreTable = semaphoreTable;
         originalProgram = deepCopy(prg);
         stk.push(prg);
     }
@@ -71,6 +74,9 @@ public class PrgState {
     public MyDictionary<StringValue, BufferedReader> getFileTable() {
         return fileTable;
     }
+    public SemaphoreTable getSemaphoreTable() {
+        return semaphoreTable;
+    }
 
     public MyHeap<Integer, Value> getHeap() {
         return heap;
@@ -91,6 +97,9 @@ public class PrgState {
         representation += this.fileTable.toString();
         representation += "\nHeap: \n";
         representation += this.heap.toString();
+        representation += "\nSemaphore Table: \n";
+        representation += this.semaphoreTable.toString();
+        representation += "\n------------------\n";
 
         return representation;
     }

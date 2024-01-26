@@ -4,8 +4,8 @@ import javafx.beans.property.SimpleStringProperty;
 import main.a7.Model.Values.Value;
 
 public class HeapEntry {
-    private SimpleStringProperty heapAddress;
-    private SimpleStringProperty heapValue;
+    private final SimpleStringProperty heapAddress;
+    private final SimpleStringProperty heapValue;
 
     public HeapEntry(Integer heapAddress, Value heapValue){
         this.heapAddress = new SimpleStringProperty(Integer.toString(heapAddress));

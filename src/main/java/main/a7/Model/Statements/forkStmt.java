@@ -25,7 +25,7 @@ public class forkStmt implements Stmt {
     @Override
     public PrgState execute(PrgState state) throws MyException, IOException, CloneNotSupportedException {
         SymTable symTable = state.getSymTable();
-        return new PrgState(new ExecutionStack<>(), symTable.deepCopy(), state.getOut(), state.getFileTable(), state.getHeap(), stmt);
+        return new PrgState(new ExecutionStack<>(), symTable.deepCopy(), state.getOut(), state.getFileTable(), state.getHeap(), state.getSemaphoreTable(), stmt);
     }
 
     @Override
